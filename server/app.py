@@ -6,11 +6,15 @@ import spacy
 from spacy.lang.en.stop_words import STOP_WORDS
 from collections import Counter
 from transformers import T5Tokenizer, T5ForConditionalGeneration
-
+from dotenv import load_dotenv
 import os
 
+load_dotenv()
+
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb+srv://rajchand99:rajchand99@focus.1e9gpvt.mongodb.net/focus?retryWrites=true"
+
+# Use environment variable for MongoDB URI
+app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 
 CORS(app)
 mongo = PyMongo(app)
